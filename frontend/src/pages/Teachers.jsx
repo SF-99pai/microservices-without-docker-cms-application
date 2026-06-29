@@ -24,14 +24,22 @@ function Teachers() {
 
   const handleSubmit = async (teacher) => {
     try {
+      const payload = {
+        name: teacher.name,
+        email: teacher.email,
+        subject: teacher.subject,
+      };
+
       if (editingTeacher) {
-        await teacherApi.update(teacher.teacher_id, teacher);
+        const updated = await teacherApi.update(editingTeacher.id, payload);
+        setTeachers((prev) => prev.map((t) => (t.id === updated.id ? updated : t)));
         setEditingTeacher(null);
       } else {
-        await teacherApi.create(teacher);
+        const created = await teacherApi.create(payload);
+        setTeachers((prev) => [...prev, created]);
       }
 
-      loadTeachers();
+      await loadTeachers();
     } catch (error) {
       console.error(error);
     }

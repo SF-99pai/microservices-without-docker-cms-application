@@ -1,32 +1,35 @@
 function TeacherTable({ teachers, onEdit, onDelete }) {
   return (
-    <table border="1" cellPadding="10">
-      <thead>
-        <tr>
-          <th>Teacher ID</th>
-          <th>Teacher Name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <div className="table-wrapper">
+      <table className="student-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
       <tbody>
         {teachers.length === 0 ? (
           <tr>
-            <td colSpan="3">No Teachers Found</td>
+            <td colSpan="4">No Teachers Found</td>
           </tr>
         ) : (
           teachers.map((teacher) => (
-            <tr key={teacher.teacher_id}>
-              <td>{teacher.teacher_id}</td>
-              <td>{teacher.teacher_name}</td>
-
-              <td>
-                <button onClick={() => onEdit(teacher)}>
+            <tr key={teacher.id}>
+              <td>{teacher.name}</td>
+              <td>{teacher.email}</td>
+              <td>{teacher.subject}</td>
+              <td className="actions">
+                <button className="edit" onClick={() => onEdit(teacher)}>
                   Edit
                 </button>
 
                 <button
-                  onClick={() => onDelete(teacher.teacher_id)}
+                  className="delete"
+                  onClick={() => onDelete(teacher.id)}
                 >
                   Delete
                 </button>
@@ -36,7 +39,7 @@ function TeacherTable({ teachers, onEdit, onDelete }) {
         )}
       </tbody>
     </table>
-  );
+  </div>
 }
 
 export default TeacherTable;

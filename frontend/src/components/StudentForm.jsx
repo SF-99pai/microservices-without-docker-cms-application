@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 const initialState = {
-  student_id: "",
-  student_name: "",
+  name: "",
+  email: "",
+  course: "",
 };
 
 function StudentForm({ onSubmit, editingStudent, onCancel }) {
@@ -10,7 +11,11 @@ function StudentForm({ onSubmit, editingStudent, onCancel }) {
 
   useEffect(() => {
     if (editingStudent) {
-      setFormData(editingStudent);
+      setFormData({
+        name: editingStudent.name || "",
+        email: editingStudent.email || "",
+        course: editingStudent.course || "",
+      });
     } else {
       setFormData(initialState);
     }
@@ -33,33 +38,53 @@ function StudentForm({ onSubmit, editingStudent, onCancel }) {
     <form onSubmit={handleSubmit} className="form">
       <h2>{editingStudent ? "Edit Student" : "Add Student"}</h2>
 
-      <input
-        type="text"
-        name="student_id"
-        placeholder="Student ID"
-        value={formData.student_id}
-        onChange={handleChange}
-        required
-      />
+      <label>
+        Student Name
+        <input
+          type="text"
+          name="name"
+          placeholder="Student Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </label>
 
-      <input
-        type="text"
-        name="student_name"
-        placeholder="Student Name"
-        value={formData.student_name}
-        onChange={handleChange}
-        required
-      />
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </label>
 
-      <button type="submit">
-        {editingStudent ? "Update" : "Save"}
-      </button>
+      <label>
+        Course
+        <input
+          type="text"
+          name="course"
+          placeholder="Course"
+          value={formData.course}
+          onChange={handleChange}
+          required
+        />
+      </label>
 
-      {editingStudent && (
-        <button type="button" onClick={onCancel}>
-          Cancel
+      <div className="form-actions">
+        <button type="submit">
+          {editingStudent ? "Update Student" : "Save Student"}
         </button>
-      )}
+
+        {editingStudent && (
+          <button type="button" className="button-secondary" onClick={onCancel}>
+            Cancel
+          </button>
+        )}
+      </div>
     </form>
   );
 }

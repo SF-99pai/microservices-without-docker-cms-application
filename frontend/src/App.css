@@ -275,3 +275,137 @@ textarea {
     padding: 28px;
   }
 }
+
+.form {
+  max-width: 720px;
+  margin: 0 auto 32px;
+  padding: 28px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+  display: grid;
+  gap: 18px;
+}
+
+.form h2 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: #111827;
+}
+
+.form label {
+  display: grid;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.form input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: flex-start;
+}
+
+.form button {
+  min-width: 140px;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #5f3bf3, #7c3aed);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(124, 58, 237, 0.18);
+}
+
+.button-secondary {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+.student-table th,
+.student-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.student-table th {
+  background: #f8fafc;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.student-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.student-table button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.student-table button.edit {
+  background: #4338ca;
+  color: white;
+}
+
+.student-table button.delete {
+  background: #ef4444;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .form {
+    padding: 22px;
+  }
+
+  .student-table th,
+  .student-table td {
+    padding: 14px 16px;
+  }
+}

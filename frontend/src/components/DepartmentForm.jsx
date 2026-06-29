@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 const initialState = {
-  department_id: "",
-  department_name: "",
+  name: "",
+  hod: "",
+  block: "",
 };
 
 function DepartmentForm({ onSubmit, editingDepartment, onCancel }) {
@@ -10,7 +11,11 @@ function DepartmentForm({ onSubmit, editingDepartment, onCancel }) {
 
   useEffect(() => {
     if (editingDepartment) {
-      setFormData(editingDepartment);
+      setFormData({
+        name: editingDepartment.name || "",
+        hod: editingDepartment.hod || "",
+        block: editingDepartment.block || "",
+      });
     } else {
       setFormData(initialState);
     }
@@ -33,23 +38,41 @@ function DepartmentForm({ onSubmit, editingDepartment, onCancel }) {
     <form onSubmit={handleSubmit} className="form">
       <h2>{editingDepartment ? "Edit Department" : "Add Department"}</h2>
 
-      <input
-        type="text"
-        name="department_id"
-        placeholder="Department ID"
-        value={formData.department_id}
-        onChange={handleChange}
-        required
-      />
+      <label>
+        Name
+        <input
+          type="text"
+          name="name"
+          placeholder="Department Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </label>
 
-      <input
-        type="text"
-        name="department_name"
-        placeholder="Department Name"
-        value={formData.department_name}
-        onChange={handleChange}
-        required
-      />
+      <label>
+        HOD
+        <input
+          type="text"
+          name="hod"
+          placeholder="Head of Department"
+          value={formData.hod}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      <label>
+        Block
+        <input
+          type="text"
+          name="block"
+          placeholder="Block"
+          value={formData.block}
+          onChange={handleChange}
+          required
+        />
+      </label>
 
       <button type="submit">
         {editingDepartment ? "Update" : "Save"}

@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { departmentApi } from "../api/api";
 
+import DepartmentForm from "../components/DepartmentForm";
+import DepartmentTable from "../components/DepartmentTable";
+
 function Departments() {
   const [departments, setDepartments] = useState([]);
+  const [editingDepartment, setEditingDepartment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -23,23 +27,55 @@ function Departments() {
     loadDepartments();
   }, []);
 
+  const handleSubmit = async (department) => {
+    try {
+      const payload = {
+        name: department.name,
+        hod: department.hod,
+        block: department.block,
+      };
+
+      if (editingDepartment) {
+        const updated = await departmentApi.update(editingDepartment.id, payload);
+        setDepartments((prev) => prev.map((d) => (d.id === updated.id ? updated : d)));
+        setEditingDepartment(null);
+      } else {
+        const created = await departmentApi.create(payload);
+        setDepartments((prev) => [...prev, created]);
+      }
+
+      await loadDepartments();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this department?")) return;
+
+    try {
+      await departmentApi.remove(id);
+      await loadDepartments();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div>
-      <h1>Department Management</h1>
+      <DepartmentForm
+        onSubmit={handleSubmit}
+        editingDepartment={editingDepartment}
+        onCancel={() => setEditingDepartment(null)}
+      />
 
-      {loading && <p>Loading departments...</p>}
+      <br />
 
-      {error && <p>{error}</p>}
-
-      {!loading && !error && (
-        <>
-          <p>Total Departments: {departments.length}</p>
-
-          {/* DepartmentForm will be added here */}
-
-          {/* DepartmentTable will be added here */}
-        </>
-      )}
+      <DepartmentTable
+        departments={departments}
+        onEdit={setEditingDepartment}
+        onDelete={handleDelete}
+      />
     </div>
   );
 }

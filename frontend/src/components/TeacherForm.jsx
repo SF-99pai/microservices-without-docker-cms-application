@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 const initialState = {
-  teacher_id: "",
-  teacher_name: "",
+  name: "",
+  email: "",
+  subject: "",
 };
 
 function TeacherForm({ onSubmit, editingTeacher, onCancel }) {
@@ -10,7 +11,11 @@ function TeacherForm({ onSubmit, editingTeacher, onCancel }) {
 
   useEffect(() => {
     if (editingTeacher) {
-      setFormData(editingTeacher);
+      setFormData({
+        name: editingTeacher.name || "",
+        email: editingTeacher.email || "",
+        subject: editingTeacher.subject || "",
+      });
     } else {
       setFormData(initialState);
     }
@@ -33,23 +38,41 @@ function TeacherForm({ onSubmit, editingTeacher, onCancel }) {
     <form onSubmit={handleSubmit} className="form">
       <h2>{editingTeacher ? "Edit Teacher" : "Add Teacher"}</h2>
 
-      <input
-        type="text"
-        name="teacher_id"
-        placeholder="Teacher ID"
-        value={formData.teacher_id}
-        onChange={handleChange}
-        required
-      />
+      <label>
+        Name
+        <input
+          type="text"
+          name="name"
+          placeholder="Teacher Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </label>
 
-      <input
-        type="text"
-        name="teacher_name"
-        placeholder="Teacher Name"
-        value={formData.teacher_name}
-        onChange={handleChange}
-        required
-      />
+      <label>
+        Email
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      <label>
+        Subject
+        <input
+          type="text"
+          name="subject"
+          placeholder="Subject"
+          value={formData.subject}
+          onChange={handleChange}
+          required
+        />
+      </label>
 
       <button type="submit">
         {editingTeacher ? "Update" : "Save"}

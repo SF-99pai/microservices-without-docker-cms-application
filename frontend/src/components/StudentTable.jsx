@@ -1,43 +1,45 @@
 function StudentTable({ students, onEdit, onDelete }) {
   return (
-    <table border="1" cellPadding="10">
-      <thead>
-        <tr>
-          <th>Student ID</th>
-          <th>Student Name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {students.length === 0 ? (
+    <div className="table-wrapper">
+      <table className="student-table">
+        <thead>
           <tr>
-            <td colSpan="3">No Students Found</td>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Actions</th>
           </tr>
-        ) : (
-          students.map((student) => (
-            <tr key={student.student_id}>
-              <td>{student.student_id}</td>
-              <td>{student.student_name}</td>
+        </thead>
 
-              <td>
-                <button onClick={() => onEdit(student)}>
-                  Edit
-                </button>
-
-                <button
-                  onClick={() =>
-                    onDelete(student.student_id)
-                  }
-                >
-                  Delete
-                </button>
-              </td>
+        <tbody>
+          {students.length === 0 ? (
+            <tr>
+              <td colSpan="4">No Students Found</td>
             </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+          ) : (
+            students.map((student) => (
+              <tr key={student.id}>
+                <td>{student.name}</td>
+                <td>{student.email}</td>
+                <td>{student.course}</td>
+                <td className="actions">
+                  <button className="edit" onClick={() => onEdit(student)}>
+                    Edit
+                  </button>
+
+                  <button
+                    className="delete"
+                    onClick={() => onDelete(student.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

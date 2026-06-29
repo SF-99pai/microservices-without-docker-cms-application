@@ -24,14 +24,22 @@ function Students() {
 
   const handleSubmit = async (student) => {
     try {
+      const payload = {
+        name: student.name,
+        email: student.email,
+        course: student.course,
+      };
+
       if (editingStudent) {
-        await studentApi.update(student.student_id, student);
+        const updated = await studentApi.update(editingStudent.id, payload);
+        setStudents((prev) => prev.map((s) => (s.id === updated.id ? updated : s)));
         setEditingStudent(null);
       } else {
-        await studentApi.create(student);
+        const created = await studentApi.create(payload);
+        setStudents((prev) => [...prev, created]);
       }
 
-      loadStudents();
+      await loadStudents();
     } catch (error) {
       console.error(error);
     }

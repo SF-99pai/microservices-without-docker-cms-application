@@ -1,35 +1,34 @@
-function DepartmentTable({ departments, onEdit, onDelete }) {
+﻿function StudentTable({ students, onEdit, onDelete }) {
   return (
     <div className="table-wrapper">
       <table className="student-table">
         <thead>
           <tr>
             <th>Name</th>
-            <th>HOD</th>
-            <th>Block</th>
+            <th>Email</th>
+            <th>Course</th>
             <th>Actions</th>
           </tr>
         </thead>
 
         <tbody>
-          {departments.length === 0 ? (
+          {students.length === 0 ? (
             <tr>
-              <td colSpan="4">No Departments Found</td>
+              <td colSpan="4">No Students Found</td>
             </tr>
           ) : (
-            departments.map((department) => (
-              <tr key={department.id}>
-                <td>{department.name}</td>
-                <td>{department.hod}</td>
-                <td>{department.block}</td>
+            students.map((student) => (
+              <tr key={student.id}>
+                <td>{student.name}</td>
+                <td>{student.email}</td>
+                <td>{student.course}</td>
                 <td className="actions">
-                  <button className="edit" onClick={() => onEdit(department)}>
+                  <button className="edit" onClick={() => onEdit(student)}>
                     Edit
                   </button>
-
                   <button
                     className="delete"
-                    onClick={() => onDelete(department.id)}
+                    onClick={() => onDelete(student.id)}
                   >
                     Delete
                   </button>
@@ -43,4 +42,4 @@ function DepartmentTable({ departments, onEdit, onDelete }) {
   );
 }
 
-export default DepartmentTable;
+export default StudentTable;
