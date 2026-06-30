@@ -1,5 +1,24 @@
-const BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+// Dynamically determine the API base URL
+const getApiBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_BASE_URL;
+  
+  // If VITE_API_BASE_URL is explicitly set and not localhost, use it
+  if (envUrl && !envUrl.includes('localhost') && !envUrl.includes('127.0.0.1')) {
+    return envUrl;
+  }
+  
+  // On production/deployed environments, use the current domain
+  if (typeof window !== 'undefined') {
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+    return `${protocol}//${host}`;
+  }
+  
+  // Fallback for development
+  return "http://localhost:8000";
+};
+
+const BASE_URL = getApiBaseUrl();
 
 const jsonHeaders = {
   "Content-Type": "application/json",
