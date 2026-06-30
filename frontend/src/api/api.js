@@ -1,5 +1,5 @@
 const BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 const jsonHeaders = {
   "Content-Type": "application/json",
@@ -26,22 +26,22 @@ async function request(path, options = {}) {
 // =========================
 
 export const studentApi = {
-  list: () => request("/students"),
-  get: (id) => request(`/students/${id}`),
+  list: () => request("/api/students"),
+  get: (id) => request(`/api/students/${id}`),
   create: (data) =>
-    request("/students", {
+    request("/api/students", {
       method: "POST",
       headers: jsonHeaders,
       body: JSON.stringify(data),
     }),
   update: (id, data) =>
-    request(`/students/${id}`, {
+    request(`/api/students/${id}`, {
       method: "PUT",
       headers: jsonHeaders,
       body: JSON.stringify(data),
     }),
   remove: (id) =>
-    request(`/students/${id}`, {
+    request(`/api/students/${id}`, {
       method: "DELETE",
     }),
 };
@@ -51,22 +51,22 @@ export const studentApi = {
 // =========================
 
 export const teacherApi = {
-  list: () => request("/teachers"),
-  get: (id) => request(`/teachers/${id}`),
+  list: () => request("/api/teachers"),
+  get: (id) => request(`/api/teachers/${id}`),
   create: (data) =>
-    request("/teachers", {
+    request("/api/teachers", {
       method: "POST",
       headers: jsonHeaders,
       body: JSON.stringify(data),
     }),
   update: (id, data) =>
-    request(`/teachers/${id}`, {
+    request(`/api/teachers/${id}`, {
       method: "PUT",
       headers: jsonHeaders,
       body: JSON.stringify(data),
     }),
   remove: (id) =>
-    request(`/teachers/${id}`, {
+    request(`/api/teachers/${id}`, {
       method: "DELETE",
     }),
 };
@@ -76,22 +76,22 @@ export const teacherApi = {
 // =========================
 
 export const departmentApi = {
-  list: () => request("/departments"),
-  get: (id) => request(`/departments/${id}`),
+  list: () => request("/api/departments"),
+  get: (id) => request(`/api/departments/${id}`),
   create: (data) =>
-    request("/departments", {
+    request("/api/departments", {
       method: "POST",
       headers: jsonHeaders,
       body: JSON.stringify(data),
     }),
   update: (id, data) =>
-    request(`/departments/${id}`, {
+    request(`/api/departments/${id}`, {
       method: "PUT",
       headers: jsonHeaders,
       body: JSON.stringify(data),
     }),
   remove: (id) =>
-    request(`/departments/${id}`, {
+    request(`/api/departments/${id}`, {
       method: "DELETE",
     }),
 };

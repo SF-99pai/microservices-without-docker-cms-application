@@ -10,9 +10,9 @@ from app.proxy import (
 # ROUTERS
 # =====================================================
 
-student_router = APIRouter(tags=["Student API"])
-teacher_router = APIRouter(tags=["Teacher API"])
-department_router = APIRouter(tags=["Department API"])
+student_router = APIRouter(prefix="/api", tags=["Student API"])
+teacher_router = APIRouter(prefix="/api", tags=["Teacher API"])
+department_router = APIRouter(prefix="/api", tags=["Department API"])
 
 
 # =====================================================

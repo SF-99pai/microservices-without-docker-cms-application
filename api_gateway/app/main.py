@@ -42,3 +42,8 @@ async def home():
 app.include_router(student_router)
 app.include_router(teacher_router)
 app.include_router(department_router)
+
+
+@app.get("/{full_path:path}")
+async def serve_frontend(full_path: str):
+    return FileResponse(FRONTEND_DIR / "index.html")
